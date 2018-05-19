@@ -1,0 +1,224 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.6.16
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema kr
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ kr;
+USE kr;
+
+--
+-- Table structure for table `kr`.`account`
+--
+
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE `account` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `date` date DEFAULT NULL,
+  `Description` varchar(255) DEFAULT NULL,
+  `amount` double(100,0) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kr`.`account`
+--
+
+/*!40000 ALTER TABLE `account` DISABLE KEYS */;
+/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `kr`.`account_type`
+--
+
+DROP TABLE IF EXISTS `account_type`;
+CREATE TABLE `account_type` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `atype` varchar(255) DEFAULT NULL,
+  `invoice` varchar(50) DEFAULT NULL,
+  `stock` varchar(50) DEFAULT NULL,
+  `expenses` varchar(50) DEFAULT NULL,
+  `accounts` varchar(50) DEFAULT NULL,
+  `option` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kr`.`account_type`
+--
+
+/*!40000 ALTER TABLE `account_type` DISABLE KEYS */;
+INSERT INTO `account_type` (`id`,`atype`,`invoice`,`stock`,`expenses`,`accounts`,`option`) VALUES 
+ (1,'Manager','true','true','true','true','true'),
+ (2,'Cashier','true','true','true','false','false'),
+ (3,'Admin','true','true','true','true','true');
+/*!40000 ALTER TABLE `account_type` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `kr`.`employees`
+--
+
+DROP TABLE IF EXISTS `employees`;
+CREATE TABLE `employees` (
+  `id` int(100) NOT NULL AUTO_INCREMENT,
+  `e_id` varchar(255) DEFAULT NULL,
+  `f_name` varchar(255) DEFAULT NULL,
+  `l_name` varchar(255) DEFAULT NULL,
+  `contact` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kr`.`employees`
+--
+
+/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `kr`.`grn_info`
+--
+
+DROP TABLE IF EXISTS `grn_info`;
+CREATE TABLE `grn_info` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `grn_no` varchar(255) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `item_count` double(50,0) DEFAULT NULL,
+  `amount` double(50,0) DEFAULT NULL,
+  `supplier` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kr`.`grn_info`
+--
+
+/*!40000 ALTER TABLE `grn_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `grn_info` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `kr`.`invoice_info`
+--
+
+DROP TABLE IF EXISTS `invoice_info`;
+CREATE TABLE `invoice_info` (
+  `id` int(50) NOT NULL AUTO_INCREMENT,
+  `invoice_no` varchar(255) DEFAULT NULL,
+  `item_id` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `batch_no` varchar(255) DEFAULT NULL,
+  `unit_price` double(50,0) DEFAULT NULL,
+  `qty` double(100,0) DEFAULT NULL,
+  `amount` double(100,0) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kr`.`invoice_info`
+--
+
+/*!40000 ALTER TABLE `invoice_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `invoice_info` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `kr`.`item`
+--
+
+DROP TABLE IF EXISTS `item`;
+CREATE TABLE `item` (
+  `id` int(250) NOT NULL AUTO_INCREMENT,
+  `item_id` varchar(150) DEFAULT NULL,
+  `item_name` varchar(150) DEFAULT NULL,
+  `status` varchar(150) DEFAULT NULL,
+  `item_combo` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kr`.`item`
+--
+
+/*!40000 ALTER TABLE `item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `kr`.`stock`
+--
+
+DROP TABLE IF EXISTS `stock`;
+CREATE TABLE `stock` (
+  `id` int(225) NOT NULL AUTO_INCREMENT,
+  `batch_no` varchar(225) DEFAULT NULL,
+  `item_id` varchar(225) DEFAULT NULL,
+  `name` varchar(225) DEFAULT NULL,
+  `unit_price` double(50,0) DEFAULT NULL,
+  `qty` double(50,0) DEFAULT NULL,
+  `item_combo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kr`.`stock`
+--
+
+/*!40000 ALTER TABLE `stock` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stock` ENABLE KEYS */;
+
+
+--
+-- Table structure for table `kr`.`user_accounts`
+--
+
+DROP TABLE IF EXISTS `user_accounts`;
+CREATE TABLE `user_accounts` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `eid` varchar(255) DEFAULT NULL,
+  `fname` varchar(255) DEFAULT NULL,
+  `lname` varchar(255) DEFAULT NULL,
+  `account_type` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `phiint` varchar(255) DEFAULT NULL,
+  `question` varchar(255) DEFAULT NULL,
+  `answer` varchar(255) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `kr`.`user_accounts`
+--
+
+/*!40000 ALTER TABLE `user_accounts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_accounts` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
